@@ -7,6 +7,8 @@ const question = (question={}, action) => {
                     questionParams: action.payload.question_params};
         case "SUBMIT_ANSWER":
             return {};
+        case "GET_HELP":
+            return {};
         default:
             return question;
     }
@@ -21,9 +23,36 @@ const answer = (answer={}, action) => {
                     userCorrect: action.payload.user_correct};
         case "FETCH_QUESTION":
             return {};
+        case "GET_HELP":
+            return {};
 
         default:
             return answer;
     }
 };
-export default combineReducers({question, answer});
+
+const help = (help={}, action) => {
+  switch(action.type){
+      case "GET_HELP":
+          return action.payload;
+          case "FETCH_QUESTION":
+              return {};
+
+      default:
+          return help;
+  }
+};
+
+const helpStepIndex = (index=0, action) => {
+    switch(action.type){
+        case "POPULATE_HELP_INDEX":
+            return action.payload;
+        case "FETCH_QUESTION":
+            return 0;
+        case "GET_HELP":
+            return 0;
+        default:
+            return index;
+    }
+}
+export default combineReducers({question, answer, help, helpStepIndex});

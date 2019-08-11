@@ -13,5 +13,9 @@ export const submitAnswer = (answer, questionParams) => async (dispatch) => {
 
 export const getHelp = questionParams => async dispatch => {
     const response = await axios.post(`${baseUrl}/api/help`, {...questionParams})
-    console.log(response.data);
-}
+    return dispatch({type: "GET_HELP", payload: response.data});
+};
+
+export const populateNextHelpStepIndex = nextHelpStepIndex => {
+    return {type: "POPULATE_HELP_INDEX", payload: nextHelpStepIndex}
+};

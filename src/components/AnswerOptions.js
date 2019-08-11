@@ -10,20 +10,17 @@ class AnswerOptions extends React.Component{
 
     renderAnswers(){
 
-         return this.props.answerOptions.map((answer, index) => {
-             return (
-                 answer === this.state.selectedAnswer ?
-                     <div>
-                         <div>{answer}</div>
-                         <input key={answer} type="radio" value={answer} name="answer" onChange={(event) => this.setState({selectedAnswer: event.target.value})} checked/>
-                     </div>
-                     :
-                 <div>
-                     <div>{answer}</div>
-                     <input key={answer} type="radio" value={answer} name="answer" onChange={(event) => this.setState({selectedAnswer: event.target.value})}/>
-                 </div>
-             )
-         })
+
+        return this.props.answerOptions.map((answer, index) => {
+            return (
+                    <div>
+                        <div>{answer}</div>
+                        <input key={answer} type="radio" value={answer} checked={this.state.selectedAnswer === answer}
+                               name="answer" onChange={(event) => this.setState({selectedAnswer: event.target.value})}/>
+                    </div>
+            )
+        })
+        
     }
 
     render(){
