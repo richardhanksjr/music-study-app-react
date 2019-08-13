@@ -14,6 +14,11 @@ class Help extends React.Component{
         this.props.populateNextHelpStepIndex(this.props.currentIndex + 1);
     };
 
+    nextQuestion = () => {
+        this.setState({showAnswer: false});
+        this.props.fetchQuestion();
+    }
+
     renderHelpSteps(){
         return this.props.help.map((item, index, arr) => {
             if (index <= this.props.currentIndex) {
@@ -24,19 +29,28 @@ class Help extends React.Component{
                             <button onClick={() => this.setState({showAnswer: true})}>Answer</button>
                         </div>
                     )
-                }else if (this.props.currentIndex < arr.length - 1){
+                }else if (this.props.currentIndex < arr.length - 1) {
                     return (
                         <div>
                             <HelpPrompt helpStep={item}/>
                             <div>{item.answer}</div>
                             <button onClick={this.nextHelpStep}>Next Help Step</button>
                         </div>)
-                }else{
+                }else if (index < this.props.currentIndex){
                     return (
                         <div>
                             <HelpPrompt helpStep={item}/>
                             <div>{item.answer}</div>
-                            <button onClick={() => this.props.fetchQuestion()}>Next Question</button>
+                            {/*<button onClick={() => this.props.fetchQuestion()}>Next Question</button>*/}
+                        </div>)
+                }
+
+                else{
+                    return (
+                        <div>
+                            <HelpPrompt helpStep={item}/>
+                            <div>{item.answer}</div>
+                            <button onClick={this.nextQuestion}>Next Question</button>
                         </div>)
                 }
             }
